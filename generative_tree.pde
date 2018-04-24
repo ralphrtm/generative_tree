@@ -1,10 +1,11 @@
 tree t1, t2, t3;
 
 void setup() {
-  //size(1000, 1000, P3D);
-  fullScreen();
+  size(800, 600,P2D);
+  //fullScreen();
   background(0);
-
+  frameRate(25);
+  noiseDetail(1);
   //t1 = new tree(new PVector(500, height), 60);
   t2 = new tree(new PVector(width/2, height), 60);
   //t3 = new tree(new PVector(width-500, height), 60);
@@ -12,7 +13,7 @@ void setup() {
 
 void draw() {
   background(0);
-
+  fill(255);
   text(frameRate, 10, 10);
  // if (frameCount > 100) t1.display();
   t2.display(); 

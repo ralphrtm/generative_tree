@@ -5,11 +5,12 @@ class leaf {
   float locxOf, locyOf;
 
   color col;
+  color colDeath = color(255, 152, 51);
   color c1;
   color c2;
 
   leaf(PVector _location, color _c1, color _c2) {
-    location = new PVector(random(-100, 100),random(-100, 100));
+    location = new PVector(random(-100, 100), random(-100, 100));
     locSrc = _location;
     radius = random(60, 70);
     c1 = _c1;
@@ -33,11 +34,19 @@ class leaf {
     ellipse(location.x, location.y, radius, radius);
     popMatrix();
   }
-  
-  void timetodie() {
-    location.x = noise(locxOf) * 30;
+
+  void fallLeaf() {
+    locxOf += .02;
+
+    pushMatrix();
+    translate(locSrc.x, locSrc.y);
     location.y += 1;
-    
-    //if (location.y == 0) newTree = location.x;
+    if (location.y > height - locSrc.y) location.y = height - locSrc.y; 
+    location.x = noise(locxOf) * map(location.y, 0, height - locSrc.y, 80, 0);
+    color colD = lerpColor(col, colDeath, map(location.y, 0, height - locSrc.y, 0, 1));
+    noStroke();
+    fill(colD, alph);
+    ellipse(location.x, location.y, radius, radius);
+    popMatrix();
   }
 }
